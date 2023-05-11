@@ -1,0 +1,33 @@
+{
+  "name": "todo-nx-store-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/todo-nx-store-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/todo-nx-store-e2e/cypress.config.ts",
+        "devServerTarget": "todo-nx-store:serve:development",
+        "testingType": "e2e"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "todo-nx-store:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "todo-nx-store:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/todo-nx-store-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["todo-nx-store"]
+}
